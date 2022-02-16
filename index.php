@@ -1,3 +1,4 @@
+<h1>Эти изменения сделал kda</h1>
 <?php
     require "dbconnect.php";
     echo ("<table border='1'>");
