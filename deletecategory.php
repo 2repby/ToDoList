@@ -8,10 +8,10 @@
         echo ("Категория успешно удалена");
         // return generated id
         // $id = $pdo->lastInsertId('id');
-
     } catch (PDOexception $error) {
-        echo ("Ошибка: " . $error->getMessage());
+        echo ("Ошибка удаления категории: " . $error->getMessage());
     }
+    // перенаправление на главную страницу приложения
     header('Location: http://todolist');
     exit( );
 

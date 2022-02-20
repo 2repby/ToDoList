@@ -1,6 +1,6 @@
 <h1>Категории задач:</h1>
+<table border='1'>
 <?php
-echo ("<table border='1'>");
 $result = $conn->query("SELECT * FROM category");
 while ($row = $result->fetch()) {
     echo '<tr>';
@@ -8,8 +8,8 @@ while ($row = $result->fetch()) {
     echo '<td><a href=deletecategory.php?id='.$row['id'].'>Удалить</a></td>';
     echo '</tr>';
 }
-echo ("</table>");
 ?>
+</table>
 <h2>Создание категории</h2>
 <form method="get" action="insertcategory.php">
     <input type="text" name="name">
