@@ -9,9 +9,14 @@ while ($row = $result->fetch()) {
     echo '</tr>';
 }
 ?>
+
+<?php if (isset($_SESSION['login'])): ?>
+
 </table>
 <h2>Создание категории</h2>
 <form method="get" action="insertcategory.php">
     <input type="text" name="name">
     <input type="submit" value="Создать">
 </form>
+
+<?php endif ?>
