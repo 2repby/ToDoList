@@ -1,7 +1,7 @@
 <h1>Категории задач:</h1>
 <table border='1'>
 <?php
-$result = $conn->query("SELECT * FROM category");
+$result = $conn->query("SELECT * FROM category WHERE id_user=". $_SESSION['id']);
 while ($row = $result->fetch()) {
     echo '<tr>';
     echo '<td>' . $row['id'] . '</td><td>' . $row['name'] . '</td>';
