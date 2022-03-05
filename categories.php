@@ -4,7 +4,7 @@
 $result = $conn->query("SELECT * FROM category WHERE id_user=". $_SESSION['id']);
 while ($row = $result->fetch()) {
     echo '<tr>';
-    echo '<td>' . $row['id'] . '</td><td>' . $row['name'] . '</td>';
+    echo '<td>' .  $row['id']. '</td><td>' . $row['name'] . '</td>';
     echo '<td><a href=deletecategory.php?id='.$row['id'].'>Удалить</a></td>';
     echo '</tr>';
 }

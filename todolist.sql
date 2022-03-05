@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 07 2022 г., 07:03
+-- Время создания: Мар 03 2022 г., 11:58
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.1.33
 
@@ -29,17 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_user` int(10) UNSIGNED DEFAULT NULL COMMENT 'ID ползователя, создавшего категорию'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Категория задачи';
 
 --
 -- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Работа'),
-(2, 'Дом'),
-(3, 'Общественные поручения');
+INSERT INTO `category` (`id`, `name`, `id_user`) VALUES
+(1, 'Работа', NULL),
+(2, 'Дом', NULL),
+(3, 'Общественные поручения', NULL),
+(15, 'Дом', 1),
+(33, 'Верстка и дизайн web-страниц', 2),
+(35, 'Ремонт', 2),
+(38, 'Не удалишь!', 1);
 
 -- --------------------------------------------------------
 
@@ -64,7 +69,9 @@ CREATE TABLE `task` (
 
 INSERT INTO `task` (`id`, `name`, `description`, `created_at`, `deadline`, `done`, `id_category`, `id_user`) VALUES
 (1, 'Написать статью', 'Написать статью на тему \"Работа с сервером MySQL\"', '2022-02-07 06:58:23', '2022-02-28 08:58:23', NULL, 1, 1),
-(2, 'Ремонт в ванной', 'Повесить светильник', '2022-02-07 07:00:19', '2022-02-16 04:00:19', NULL, 2, 1);
+(2, 'Ремонт в ванной', 'Повесить светильник', '2022-02-07 07:00:19', '2022-02-16 04:00:19', NULL, 2, 1),
+(3, 'TestTask', 'TestTaskTestTaskTestTaskTestTask', NULL, '2022-03-05 10:25:00', NULL, 15, 2),
+(4, 'sdaf', 'sdfg', '2022-02-28 08:42:47', '2022-03-04 10:42:00', NULL, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -85,7 +92,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `md5password`) VALUES
-(1, 'Дмитрий', 'Кузин', '2repby@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99');
+(1, 'Дмитрий', 'Кузин', '2repby@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(2, 'Dmitrii', 'Kuzin', 'kuzin_da@surgu.ru', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 --
 -- Индексы сохранённых таблиц
@@ -95,7 +103,8 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `md5password`) VALUE
 -- Индексы таблицы `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Индексы таблицы `task`
@@ -119,23 +128,29 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT для таблицы `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `category`
+--
+ALTER TABLE `category`
+  ADD CONSTRAINT `category_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `task`
