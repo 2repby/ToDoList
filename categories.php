@@ -1,5 +1,5 @@
 <h1>Категории задач:</h1>
-<table border='1'>
+<table class="table table-striped">
 <?php
 $result = $conn->query("SELECT * FROM category");
 while ($row = $result->fetch()) {

@@ -3,6 +3,7 @@
     require "dbconnect.php";
     require "auth.php";
     require "menu.php";
+    echo '<main class="container" style="margin-top: 100px">';
     switch ($_GET['page']){
         case 'c':
             require "categories.php";
@@ -17,7 +18,8 @@
             }
             break;
     }
-
+    echo '</main>';
     require "message.php";
     $_SESSION['msg'] = '';
+    require "footer.php";
 
