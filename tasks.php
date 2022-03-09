@@ -11,7 +11,7 @@
             <th>Категория</th>
             <th>Действие</th>
            </tr>';
-    $result = $conn->query("SELECT *,task.id AS id_task, category.name AS cname, task.name AS tname FROM task, category WHERE task.id_category=category.id AND id_user=".$_SESSION['id']);
+    $result = $conn->query("SELECT *, task.id AS id_task, category.name AS cname, task.name AS tname FROM task, category WHERE task.id_category=category.id AND task.id_user=".$_SESSION['id']);
     while ($row = $result->fetch()) {
         echo '<tr>';
         echo '<td>'.$row['id'].'</td>

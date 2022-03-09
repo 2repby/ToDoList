@@ -2,9 +2,10 @@
     require "dbconnect.php";
     if (strlen($_GET['name']) >= 3){
         try {
-            $sql = 'INSERT INTO category(name) VALUES(:name)';
+            $sql = 'INSERT INTO category(name,id_user) VALUES(:name,:id_user)';
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':name', $_GET['name']);
+            $stmt->bindValue(':id_user', $_SESSION['id']);
             $stmt->execute();
             $_SESSION['msg'] = "Категория успешно добавлена";
             // return generated id
