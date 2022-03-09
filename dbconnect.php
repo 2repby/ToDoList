@@ -14,5 +14,6 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     catch(PDOException $e) {
-            echo "Ошибка подключения к БД: " . $e->getMessage();
+            echo "Ошибка подключения к БД: " . $e->getMessage(), $e->getCode( );
+            die();
         }

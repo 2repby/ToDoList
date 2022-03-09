@@ -35,7 +35,7 @@
 
     if (isset($_GET["logout"]))
     {
-        session_unset();
+        $_SESSION = null;
         $_SESSION['msg'] =  "Вы успешно вышли из системы";
         header('Location: http://todolist');
         exit( );
