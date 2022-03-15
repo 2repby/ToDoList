@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 03 2022 г., 11:58
+-- Время создания: Мар 15 2022 г., 16:48
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.1.33
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `category` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_user` int(10) UNSIGNED DEFAULT NULL COMMENT 'ID ползователя, создавшего категорию'
+  `id_user` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Категория задачи';
 
 --
@@ -38,13 +38,13 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `id_user`) VALUES
-(1, 'Работа', NULL),
-(2, 'Дом', NULL),
-(3, 'Общественные поручения', NULL),
-(15, 'Дом', 1),
+(1, 'Работа', 1),
+(2, 'Дом', 1),
+(3, 'Общественные поручения', 1),
+(15, 'Дом', 2),
+(27, 'Моя семья', 2),
 (33, 'Верстка и дизайн web-страниц', 2),
-(35, 'Ремонт', 2),
-(38, 'Не удалишь!', 1);
+(34, 'Подпись письма', 2);
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `md5password`) VALUES
 (1, 'Дмитрий', 'Кузин', '2repby@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99'),
-(2, 'Dmitrii', 'Kuzin', 'kuzin_da@surgu.ru', '5f4dcc3b5aa765d61d8327deb882cf99');
+(2, 'Иван', 'Иванов', 'kuzin_da@surgu.ru', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 --
 -- Индексы сохранённых таблиц
@@ -128,7 +128,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT для таблицы `task`
