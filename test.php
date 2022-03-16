@@ -2,4 +2,4 @@
 <?php
     echo "Кузин Дмитрий - лидер команды";
     echo "Dmitrii Kuzin -  Здесь конфликт";
-    echo "Branch2";
+    echo "Branch2 ";
