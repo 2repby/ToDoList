@@ -19,7 +19,9 @@
             break;
     }
     echo '</main>';
-    require "message.php";
-    $_SESSION['msg'] = '';
+
+        require "message.php";
+
+
     require "footer.php";
 ?>

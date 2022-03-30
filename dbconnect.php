@@ -6,6 +6,7 @@
     {
         $dotenv = Dotenv::createImmutable(__DIR__);
         $dotenv->load(); //все параметры окружения помещаются в массив $_ENV
+       // var_dump($_ENV);
     }
     // подключение к БД
     try {
