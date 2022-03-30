@@ -14,7 +14,7 @@ if (strlen($_POST['name']) >= 3){
     $filename = 'file' . rand(100000, 999999) . '.' . $ext;
 
     $s3 = new S3();
-    $s3fileUploader = new S3FileUploader($s3->getS3Client());
+    $s3fileUploader = new S3FileUploader($s3->getClient());
     $uploadService = new UploadService($s3fileUploader);
     $resource = $uploadService->upload($file, $filename);
 
