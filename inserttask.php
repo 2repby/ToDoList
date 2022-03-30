@@ -1,7 +1,8 @@
 <?php
-use Aws\S3\S3Client;
-use S3FileUploader\S3FileUploader;
-use UploadService\UploadService;
+
+use FileUploader\S3;
+use FileUploader\S3FileUploader;
+use FileUploader\UploadService;
 
 require "dbconnect.php";
 if (strlen($_POST['name']) >= 3){
@@ -10,21 +11,12 @@ if (strlen($_POST['name']) >= 3){
     //получение расширения
     $ext = explode('.', $_FILES["filename"]["name"]);
     $ext = $ext[count($ext) - 1];
+    $filename = 'file' . rand(100000, 999999) . '.' . $ext;
 
-    $s3client = new S3Client([
-        'version' => 'latest',
-        'region' => 'us-east-1',
-        'endpoint' => $_ENV['S3_ENDPOINT'], //чтение настроек окружения из файла .env
-        'use_path_style_endpoint' => true,
-        'credentials' => [
-            'key' => $_ENV['S3_KEY'],
-            'secret' => $_ENV['S3_SECRET'],
-        ],
-    ]);
-
-    $s3fileUploader = new S3FileUploader($s3client);
+    $s3 = new S3();
+    $s3fileUploader = new S3FileUploader($s3->getS3Client());
     $uploadService = new UploadService($s3fileUploader);
-    $resource = $uploadService->upload($file);
+    $resource = $uploadService->upload($file, $filename);
 
         try {
             $sql = 'INSERT INTO task(name,description,created_at,deadline,id_category,id_user,picture_url) VALUES(:name,:description,:created_at,:deadline,:id_category,:id_user,:picture_url)';
