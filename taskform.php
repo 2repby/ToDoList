@@ -1,6 +1,6 @@
 
     <h2>Создание задачи</h2>
-    <form method="get" action="inserttask.php">
+    <form method="post" action="inserttask.php" enctype="multipart/form-data">
 
         <p><label>
                 Имя задачи: <input type="text" name="name">
@@ -21,8 +21,12 @@
                     }
                     ?>
                 </select>
-
             </label>
+
+        <p><label>
+                Изображение: <input type="file" name="filename">
+            </label>
+
         <p><input type="submit" value="Создать">
 
     </form>

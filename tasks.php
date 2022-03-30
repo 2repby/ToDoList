@@ -8,6 +8,7 @@
             <th>Создана</th>
             <th>Выполнить до</th>
             <th>Выполнено</th>
+            <th>Изображение</th>
             <th>Категория</th>
             <th>Действие</th>
            </tr>';
@@ -20,6 +21,7 @@
               <td>'.$row['created_at'].'</td>
               <td>'.$row['deadline'].'</td>
               <td>'.$row['done'].'</td>
+              <td>'.$row['picture_url'].'</td>
               <td>'.$row['cname'].'</td>';
 
         echo '<td><a href=deletetask.php?id='.$row['id_task'].'>Удалить</a></td>';
