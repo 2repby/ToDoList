@@ -4,13 +4,6 @@ require "dbconnect.php";
 
 
     try {
-        $result = $conn->query("SELECT * FROM task WHERE task.id=".$_GET['id']);
-        $row = $result->fetch();
-        try {
-            $resource = Container::getFileUploader()->delete($row['picture_url']);
-        } catch (S3Exception $e) {
-            $_SESSION['msg'] = $e->getMessage();
-        }
         $sql = 'DELETE FROM task WHERE id=:id';
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $_GET['id']);

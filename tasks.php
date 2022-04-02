@@ -30,18 +30,7 @@
         </a>
 ';
 
-     /*   echo '<tr>';
-        echo '<td>'.$row['id'].'</td>
-              <td>'.$row['tname'].'</td>
-              <td>'.$row['description'].'</td>
-              <td>'.$row['created_at'].'</td>
-              <td>'.$row['deadline'].'</td>
-              <td>'.$row['done'].'</td>
-              <td>'.$row['picture_url'].'</td>
-              <td>'.$row['cname'].'</td>';
 
-        echo '<td><a href=deletetask.php?id='.$row['id_task'].'>Удалить</a></td>';
-        echo '</tr>';*/
     }
     ?>
 </div class="list-group">
