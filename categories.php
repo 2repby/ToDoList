@@ -1,13 +1,30 @@
 <h1>Категории задач:</h1>
 <table class="table table-striped">
 <?php
-$result = $conn->query("SELECT * FROM category WHERE id_user=". $_SESSION['id']);
+$result = $conn->query("SELECT category.id, category.name AS cname, category.description AS cdesc, category.picture_url, count(*) as C FROM category LEFT OUTER JOIN task ON task.id_category=category.id WHERE category.id_user=".$_SESSION['id']." GROUP BY category.id");
 
 while ($row = $result->fetch()) {
-    echo '<tr>';
-    echo '<td>' .  $row['id']. '</td><td>' . $row['name'] . '</td>';
-    echo '<td><a href=deletecategory.php?id='.$row['id'].'>Удалить</a></td>';
-    echo '</tr>';
+//style="max-width: 18rem;"
+    echo'
+        <div class="card border-dark mb-3" >
+            <div class="card-header">Количество задач: ' . $row['C'] . '</div>
+            <div class="card-body text-dark">
+                <div class="row g-0">
+                    <div class="col-md-1">  
+                        <img src="'.$row['picture_url'].'" alt="Task picture" height="60px">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title">' . $row['cname'] . '</h5>
+                        <p class="card-text">' . $row['cdesc'] . '</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ';
+//    echo '<tr>';
+//    echo '<td>' .  $row['id']. '</td><td>' . $row['name'] . '</td>';
+//    echo '<td><a href=deletecategory.php?id='.$row['id'].'>Удалить</a></td>';
+//    echo '</tr>';
 }
 ?>
 
@@ -15,9 +32,20 @@ while ($row = $result->fetch()) {
 
 </table>
 <h2>Создание категории</h2>
-<form method="get" action="insertcategory.php">
-    <input type="text" name="name">
-    <input type="submit" value="Создать">
+<form method="post" action="insertcategory.php" enctype="multipart/form-data">
+    <p><label>
+            Имя категории: <input type="text" name="name">
+        </label>
+    <p><label>
+            Описание категории: <input type="text" name="description">
+        </label>
+    <p><label>
+            Изображение: <input type="file" name="filename">
+        </label>
+    <p><input type="submit" value="Создать">
+</form>
+
+
 </form>
 
 <?php endif ?>

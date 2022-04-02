@@ -6,7 +6,12 @@
     echo '<main class="container" style="margin-top: 100px">';
     switch ($_GET['page']){
         case 'c':
-            require "categories.php";
+            if (isset($_SESSION['login'])) {
+                require "categories.php";
+            }
+            else{
+                $msg = 'Войдите в сиситему для просмотра и создания задач';
+                }
             break;
         case 't':
             if (isset($_SESSION['login'])){
@@ -14,14 +19,16 @@
                 require "taskform.php";
             }
             else{
-                echo 'Войдите в сиситему для просмотра и создания задач';
+                $msg = 'Войдите в сиситему для просмотра и создания задач';
             }
             break;
     }
     echo '</main>';
 
+    if(($_SESSION['msg']!='') or isset($msg)) {
         require "message.php";
-
+        $_SESSION['msg']= '';
+    }
 
     require "footer.php";
 ?>
