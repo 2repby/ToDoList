@@ -6,6 +6,7 @@ $result = $conn->query("SELECT category.id, category.name AS cname, category.des
 while ($row = $result->fetch()) {
 //style="max-width: 18rem;"
     echo'
+        
         <div class="card border-dark mb-3" >
             <div class="card-header">Количество задач: ' . $row['C'] . '</div>
             <div class="card-body text-dark">
@@ -19,7 +20,9 @@ while ($row = $result->fetch()) {
                     </div>
                 </div>
             </div>
+            <a href="/index.php?page=t" class="stretched-link"></a>
         </div>
+ 
     ';
 //    echo '<tr>';
 //    echo '<td>' .  $row['id']. '</td><td>' . $row['name'] . '</td>';
