@@ -1,5 +1,4 @@
 <h1>Категории задач:</h1>
-<table class="table table-striped">
 <?php
 $result = $conn->query("SELECT category.id, category.name AS cname, category.description AS cdesc, category.picture_url, count(task.id) as C FROM category LEFT OUTER JOIN task ON task.id_category=category.id WHERE category.id_user=".$_SESSION['id']." GROUP BY category.id");
 
@@ -33,7 +32,6 @@ while ($row = $result->fetch()) {
 
 
 
-</table>
 <h2>Создание категории</h2>
 <form method="post" action="insertcategory.php" enctype="multipart/form-data">
     <p><label>
