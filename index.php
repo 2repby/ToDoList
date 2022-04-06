@@ -2,7 +2,7 @@
     date_default_timezone_set('Asia/Yekaterinburg');
     require "dbconnect.php";
     require "auth.php";
-    require "menu.php";
+        require "menu.php";
     echo '<main class="container" style="margin-top: 100px">';
     switch ($_GET['page']){
         case 'c':
@@ -10,7 +10,7 @@
                 require "categories.php";
             }
             else{
-                $msg = 'Войдите в сиситему для просмотра и создания задач';
+                $msg = 'Войдите в сиситему для просмотра и создания категорий';
                 }
             break;
         case 't':

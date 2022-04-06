@@ -31,7 +31,7 @@ while ($row = $result->fetch()) {
 }
 ?>
 
-<?php if (isset($_SESSION['login'])): ?>
+
 
 </table>
 <h2>Создание категории</h2>
@@ -49,6 +49,5 @@ while ($row = $result->fetch()) {
 </form>
 
 
-</form>
 
-<?php endif ?>
+
