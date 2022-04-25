@@ -2,6 +2,7 @@
 
 use Aws\S3\S3Client;
 
+
 class Container
 {
     public static function getS3Client(): S3Client
@@ -28,6 +29,8 @@ class Container
     public static function getFileUploader(): FileUploader
     {
         return self::getS3FileUploader();
+        //Для изменения технологии работы с файлами поменять метод
+        //return self::getLocalFileUploader();
     }
 
     public static function getS3FileUploader(): \S3FileUploader
