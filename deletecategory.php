@@ -2,6 +2,7 @@
     require "dbconnect.php";
 
     try {
+        echo ("SELECT * FROM category WHERE category.id=".$_GET['id']);
         $result = $conn->query("SELECT * FROM category WHERE category.id=".$_GET['id']);
         $row = $result->fetch();
         try {
@@ -22,7 +23,7 @@
         $_SESSION['msg'] = "Ошибка удаления категории: " . $error->getMessage();
     }
     // перенаправление на главную страницу приложения
-    header('Location: http://todolist');
+    header('Location: http://todolist?page=c');
     exit( );
 
 

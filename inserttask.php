@@ -1,6 +1,4 @@
 <?php
-
-
 require "dbconnect.php";
 if (strlen($_POST['name']) >= 3){
 

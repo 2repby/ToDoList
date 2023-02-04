@@ -22,7 +22,7 @@ class Container
 
     public static function getS3Config(): \S3ClientConfig
     {
-        return new \S3ClientConfig($_ENV['S3_BUCKET'],$_ENV['S3_ENDPOINT'], 'us-east-1', $_ENV['S3_KEY'],$_ENV['S3_SECRET'],'latest');
+        return new \S3ClientConfig($_ENV['S3_BUCKET'],$_ENV['S3_ENDPOINT'], $_ENV['S3_REGION'], $_ENV['S3_KEY'],$_ENV['S3_SECRET'],$_ENV['S3_VERSION']);
 
     }
 

@@ -1,6 +1,6 @@
 <h1>Категории задач:</h1>
 <?php
-$result = $conn->query("SELECT category.id, category.name AS cname, category.description AS cdesc, category.picture_url, count(task.id) as C FROM category LEFT OUTER JOIN task ON task.id_category=category.id WHERE category.id_user=".$_SESSION['id']." GROUP BY category.id");
+$result = $conn->query("SELECT category.id AS id, category.name AS cname, category.description AS cdesc, category.picture_url, count(task.id) as C FROM category LEFT OUTER JOIN task ON task.id_category=category.id WHERE category.id_user=".$_SESSION['id']." GROUP BY category.id");
 
 while ($row = $result->fetch()) {
 //style="max-width: 18rem;"
@@ -13,13 +13,18 @@ while ($row = $result->fetch()) {
                     <div class="col-md-1">  
                         <img src="'.$row['picture_url'].'" alt="Task picture" height="60px">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
+                    <a class="nav-link" href="/index.php?page=t" >
                         <h5 class="card-title">' . $row['cname'] . '</h5>
                         <p class="card-text">' . $row['cdesc'] . '</p>
+                    </a>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="deletecategory.php?id='.$row['id'].'" class="btn btn-danger">Удалить</a>
                     </div>
                 </div>
             </div>
-            <a href="/index.php?page=t" class="stretched-link"></a>
+            
         </div>
  
     ';

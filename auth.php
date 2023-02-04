@@ -37,7 +37,7 @@
     {
         $_SESSION = null;
         $_SESSION['msg'] =  "Вы успешно вышли из системы";
-        header('Location: http://todolist');
+        header('Location: /');
         exit( );
     }
 
