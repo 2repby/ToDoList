@@ -11,7 +11,7 @@ while ($row = $result->fetch()) {
             <div class="card-body text-dark">
                 <div class="row g-0">
                     <div class="col-md-1">  
-                        <img src="'.$row['picture_url'].'" alt="Task picture" height="60px">
+                        <img app="'.$row['picture_url'].'" alt="Task picture" height="60px">
                     </div>
                     <div class="col-md-7">
                     <a class="nav-link" href="/index.php?page=t" >

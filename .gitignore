@@ -455,7 +455,7 @@ config.codekit3
 ##### Gradle
 .gradle
 **/build/
-!src/**/build/
+!app/**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting

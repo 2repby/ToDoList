@@ -42,4 +42,8 @@ class Container
     {
         return new \LocalFileUploader();
     }
+//    public static function getDbConnection(): \DbConnection
+//    {
+//        return new \DbConnection();
+//    }
 }
