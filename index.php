@@ -4,7 +4,6 @@
     use Framework\Request;
     use Framework\Router;
     use Framework\Application;
-
     date_default_timezone_set('Asia/Yekaterinburg');
     if ( file_exists(dirname(__FILE__).'/vendor/autoload.php') ) {
         require_once dirname(__FILE__).'/vendor/autoload.php';
@@ -19,10 +18,7 @@
     else {
         echo "Ошибка хагрузки ENV<br>";
     }
-    Application::init();
-    $request = new Request();
-
-    echo (new Router($request))->getContent();
+    \Framework\Container::getApp()->run();
 
 
     exit();
