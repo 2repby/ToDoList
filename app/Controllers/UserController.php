@@ -14,7 +14,15 @@ class UserController extends Controller
         $users = new UserModel();
 
 
-        return $this->view('user.php', ['users' =>  $users->all()]);
+        return $this->view('users.php', ['users' =>  $users->all()]);
+
+    }
+    public function getByID($id)
+    {
+        $users = new UserModel();
+
+//        var_dump($users->getById($id));
+        return $this->view('user.php', ['users' =>  $users->getById($id)]);
 
     }
 

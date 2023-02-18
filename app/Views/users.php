@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Сведения о пользователе:</h1>
+<h1>Список пользователей:</h1>
 <ul>
     <?php foreach ($data['users'] as $user): ?>
         <li>
@@ -17,7 +17,6 @@
             <?=$user->email?>
         </li>
     <?php endforeach; ?>
-
 </ul>
 </body>
 </html>
