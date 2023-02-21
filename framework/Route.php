@@ -14,12 +14,14 @@ class Route
     private $path;
     private $action;
     private $type;
+    private bool $requireAuth;
 
-    public function __construct($path, $action, $type)
+  public function __construct($path, $action, $type, bool $auth = false)
     {
         $this->path = $path;
         $this->action = $action;
         $this->type = $type;
+        $this->requireAuth = $auth;
     }
     public function getParams(){
         $params = [];
@@ -53,6 +55,25 @@ class Route
     {
         return $this->type;
     }
+
+  /**
+  
+   * @return bool
+   */
+  public function isRequireAuth(): bool
+  {
+    return $this->requireAuth;
+  }
+
+  /**
+   * @param bool $requireAuth
+   */
+  public function setRequireAuth(bool $requireAuth): void
+  {
+    $this->requireAuth = $requireAuth;
+  }
+    
+    
 
 
 }

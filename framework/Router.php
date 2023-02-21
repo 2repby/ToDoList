@@ -7,20 +7,30 @@ class Router
 {
     public static $routes = []; //use to be private
     private $request;
+    public Auth $auth;
 
-    public function __construct(Request $request)
+  public function __construct(Request $request, Auth $auth)
     {
         $this->request = $request;
+        $this->auth = $auth;
     }
 
     public function getContent(){
+        /* @var Route | null $exec_route*/
         $exec_route = null;
         foreach (self::$routes as $route){
             echo "Путь: ".$route->getPath()."<br>";
             if($route->getType() == $this->request->getType() && preg_match($route->getMask(), $this->request->getPath()))
             {
                 $exec_route = $route;
+                break;
             }
+        }
+        if($exec_route->isRequireAuth()){
+          if(!$this->auth->hasAccess($this->request)){
+              header("HTTP/1.1 401 Unauthorized");
+              return;
+          }
         }
         if($exec_route){
             $action = explode('@',$exec_route->getAction());
@@ -42,7 +52,7 @@ class Router
                     echo "params_to_controller= ";
                     var_dump($params_to_controller);
                     echo "<br>----------------<br>";
-                    return $controller->$method_name(...array_values($params_to_controller));
+                    return call_user_func_array([$controller, $method_name], array_merge($params_to_controller, ['user' => $this->request->getUser()]));
                 }
                 return "Метод ".$method_name." не найден";
             }
