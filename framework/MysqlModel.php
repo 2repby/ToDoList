@@ -16,7 +16,7 @@ class MysqlModel extends Model
     }
     public function getById($id){
 //           var_dump([$this->getIdField()=>$id]);
-        return $this->getWhere([$this->getIdField()=>$id]);
+        return $this->getWhere([$this->getIdField()=>$id, 'email'=>2]);
     }
     public function getWhere($conditions)
     {
