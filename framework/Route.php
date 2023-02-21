@@ -50,6 +50,16 @@ class Route
     {
         return $this->action;
     }
+    
+    public function getControllerClass(): string
+    {
+      return "App\Controllers\\".explode('@', $this->action)[0];
+    }
+    
+    public function getControllerMethodName(): string
+    {
+      return explode('@', $this->action)[1];
+    }
 
     public function getType()
     {

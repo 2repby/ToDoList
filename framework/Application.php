@@ -3,6 +3,7 @@
 namespace Framework;
 
 use Dotenv\Dotenv;
+use Framework\Exceptions\UnauthorizedException;
 
 class Application
 {
@@ -17,6 +18,14 @@ class Application
 
   public function run()
   {
-    echo $this->router->getContent();
+    try {
+      echo $this->router->getContent();
+    } catch (UnauthorizedException $e){
+      http_response_code(401);
+      echo 'Unauthorized';
+    } catch (\Throwable $e){
+      echo $e->getMessage()."\n\n".$e->getTraceAsString()."\n\n".$e->getFile()."\n\n".$e->getLine();
+      http_response_code(500);
+    }
   }
 }
