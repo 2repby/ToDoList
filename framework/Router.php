@@ -47,6 +47,9 @@ class Router
   {
     $params = [];
     preg_match_all($route->getMask(), $this->request->getPath(), $params);
+    echo ("Params to controller");
+    var_dump($params);
+    var_dump(array_map(fn($p) => $p[0], array_slice($params, 1)));
     return array_map(fn($p) => $p[0], array_slice($params, 1));
   }
 

@@ -7,6 +7,7 @@ class RouteNotFoundException extends \Exception
 
   public function __construct()
   {
-    $this->message = 'Router not found';
+      $this->message = 'Router not found';
+      parent::__construct();
   }
 }

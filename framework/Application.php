@@ -22,7 +22,7 @@ class Application
       echo $this->router->getContent();
     } catch (UnauthorizedException $e){
       http_response_code(401);
-      echo 'Unauthorized';
+      echo $e->getMessage();
     } catch (\Throwable $e){
       echo $e->getMessage()."\n\n".$e->getTraceAsString()."\n\n".$e->getFile()."\n\n".$e->getLine();
       http_response_code(500);
