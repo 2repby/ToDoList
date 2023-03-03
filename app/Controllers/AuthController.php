@@ -4,19 +4,20 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use Framework\Container;
 use Framework\Controller;
+use Framework\Request;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function login(Request $request)
     {
 
-        $login = Container::getRequest()->getPostParams()['login'];
-        $password = Container::getRequest()->getPostParams()['password'];
+        $login = $request->getPostParams()['login'];
+        $password = $request->getPostParams()['password'];
         echo ($login.' '.$password);
         if (isset($login) and $login != '') {
             echo('имя пользователя');
-            $userModel = new UserModel();
-            $user = $userModel->getWhere('email', '=', $login);
+
+            $user = userModel::getWhere('email', '=', $login);
             var_dump($user);
             echo $user->id;
 

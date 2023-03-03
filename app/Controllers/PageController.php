@@ -4,16 +4,15 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use Framework\Container;
 use Framework\Controller;
+use Framework\Request;
 
 
 //use UserModel;
 
 class PageController extends Controller
 {
-    public function index($view)
+    public function index(Request $request, $view)
     {
-        $login = Container::getRequest()->getUser()->login;
-        var_dump(Container::getRequest());
-        return $this->view($view.'.php', ['login' =>  $login, 'name' => 'Дима']);
+        return $this->view($view.'.php', ['user' =>  $request->getUser(), 'name' => 'Дима']);
     }
 }
