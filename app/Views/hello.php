@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+<?php require 'app/views/header.php'?>
 <h2>Добрый день <?=$data['name']?></h2>
 <h2>Вы сказали <?=$data['value']?></h2>
 </body>

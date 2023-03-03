@@ -19,7 +19,7 @@ class MysqlModel extends Model
     {
         $query = $this->connection->prepare("SELECT * FROM $this->table WHERE ".$field." ".$operation." :value");
         $query->bindParam(":value", $value);
-        echo $query->queryString;
+//        echo $query->queryString;
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_CLASS);
     }

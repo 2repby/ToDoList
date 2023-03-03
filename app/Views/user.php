@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+<?php require 'header.php'?>
 <h1>Сведения о пользователе:</h1>
 <ul>
     <?php foreach ($data['users'] as $user): ?>
