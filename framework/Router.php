@@ -36,10 +36,9 @@ class Router
    */
   private function checkAuth(Route $route)
   {
-    if ($route->isRequireAuth()) {
-      if (!$this->auth->hasAccess($this->request)) {
-        throw new UnauthorizedException();
-      }
+    $this->request = $this->auth->enrichByUser($this->request);
+    if ($route->isRequireAuth() && !$this->request->getUser()) {
+      throw new UnauthorizedException();
     }
   }
 
@@ -47,9 +46,9 @@ class Router
   {
     $params = [];
     preg_match_all($route->getMask(), $this->request->getPath(), $params);
-    echo ("<p>Params: ");
+    echo("<p>Params: ");
     var_dump($params);
-    echo ("<p>Params for controller: ");
+    echo("<p>Params for controller: ");
     var_dump(array_map(fn($p) => $p[0], array_slice($params, 1)));
     return array_map(fn($p) => $p[0], array_slice($params, 1));
   }
@@ -63,7 +62,7 @@ class Router
   {
     $exec_route = $this->getCurrentRoute();
     if (!$exec_route) {
-       throw new RouteNotFoundException();
+      throw new RouteNotFoundException();
     };
     $this->checkAuth($exec_route);
     $controller_name = $exec_route->getControllerClass();

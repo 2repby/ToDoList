@@ -7,27 +7,11 @@ use App\Models\UserModel;
 class Auth
 {
 
-
-    public function __construct(Request $request)
-    {
-        if ($_SESSION['id']){
-            $userModel = new UserModel();
-            $user = $userModel->getById($_SESSION['id']);
-            echo ('Вот и пользователь');
-            var_dump($user);
-            $request->setUser($user);
-        }
-
+  public function enrichByUser(Request $request): Request
+  {
+    if ($session = $request->getSession()) {
+      $request->setUser(UserModel::getById((int)$session['id']));
     }
-
-    public function hasAccess(Request $request): bool
-  {
-        if ($request->getUser()) return true;
-        else return false;
-  }
-
-  public function getUser(Request $request): UserModel
-  {
-        return $request->getUser();
+    return $request;
   }
 }

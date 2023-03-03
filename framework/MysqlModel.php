@@ -1,59 +1,76 @@
 <?php
+
 namespace Framework;
+
 use App\DbConnection;
 
 class MysqlModel extends Model
 {
-    protected $table;
-    protected $connection;
+  protected static \PDO $connection;
+  protected static $table = '';
 
-    /**
-     * MysqlModel constructor.
-     */
-    public function __construct()
-    {
-        $this->connection = DbConnection::getConnection();
-    }
 
-    public function getWhere($field=null, $operation=null, $value=null)
-    {
-        $query = $this->connection->prepare("SELECT * FROM $this->table WHERE ".$field." ".$operation." :value");
-        $query->bindParam(":value", $value);
+  /**
+   * MysqlModel constructor.
+   */
+  public function __construct(array $attrubutes)
+  {
+  }
+
+  public static function getWhere($field = null, $operation = null, $value = null)
+  {
+    $table = static::$table;
+    $query = self::$connection->prepare("SELECT * FROM ${table} WHERE " . $field . " " . $operation . " :value");
+    $query->bindParam(":value", $value);
 //        echo $query->queryString;
-        $query->execute();
-        return $query->fetchAll(\PDO::FETCH_CLASS);
-    }
+    $query->execute();
+    return $query->fetchAll(\PDO::FETCH_CLASS, static::class);
+  }
 
-    public function deleteWhere($conditions)
-    {
-        // TODO: Implement deleteWhere() method.
+  public static function create($fields)
+  {
+    $keys_array = array_keys($fields);
+    $keys = implode(", ", $keys_array);
+    $placeholders = implode(", ", array_map(function ($el) {
+      return ":$el";
+    }, $keys_array));
+    //var_dump($placeholders);
+    $table = static::$table;
+    $query = self::getConnection()->prepare("INSERT INTO {$table} ({$keys}) VALUES ($placeholders)");
+    foreach ($fields as $key => $field) {
+      $query->bindParam(":$key", $field);
     }
+    $query->execute();
+  }
 
-    public function updateWhere($conditions)
-    {
-        // TODO: Implement updateWhere() method.
-    }
+  public static function all()
+  {
+    $query = self::getConnection()->query("SELECT * FROM " . static::$table);
+    return $query->fetchAll(\PDO::FETCH_CLASS);
+  }
 
-    public function create($fields)
-    {
-        $keys_array = array_keys($fields);
-        $keys = implode(", ", $keys_array);
-        $placeholders = implode(", ", array_map(function($el){return ":$el";}, $keys_array));
-        //var_dump($placeholders);
-        $query = $this->connection->prepare("INSERT INTO {$this->table} ({$keys}) VALUES ($placeholders)");
-        foreach ($fields as $key => $field){
-            $query->bindParam(":$key", $field);
-        }
-        $query->execute();
-    }
+  public static function first()
+  {
+    $query = self::getConnection()->query("SELECT * FROM " . static::$table . " LIMIT 1");
+    return $query->fetchAll(\PDO::FETCH_CLASS);
+  }
 
-    public function all(){
-        $query = $this->connection->query("SELECT * FROM ".$this->table);
-        return $query->fetchAll(\PDO::FETCH_CLASS);
+  protected static function getConnection(): \PDO
+  {
+    if (self::$connection) {
+      return self::$connection;
     }
+    self::$connection = DbConnection::getConnection();
+    return self::$connection;
+  }
 
-    public function first(){
-        $query = $this->connection->query("SELECT * FROM ".$this->table." LIMIT 1");
-        return $query->fetchAll(\PDO::FETCH_CLASS);
-    }
+  public function deleteWhere($conditions)
+  {
+    // TODO: Implement deleteWhere() method.
+  }
+
+  public static function updateWhere($conditions)
+  {
+    // TODO: Implement updateWhere() method.
+  }
 }
