@@ -22,13 +22,13 @@ class Router
 
   private function getCurrentRoute(): ?Route
   {
-    foreach (self::$routes as $route) {
-      echo "Путь: " . $route->getPath() . "<br>";
-      if ($route->getType() == $this->request->getType() && preg_match($route->getMask(), $this->request->getPath())) {
-        return $route;
-      }
+    $routes = array_filter(self::$routes,
+      fn($route) => $route->getType() == $this->request->getType() && preg_match($route->getMask(), $this->request->getPath()));
+    if (!$routes) {
+      return null;
     }
-    return null;
+    usort($routes, fn($route_first, $route_second) => count($this->getParamsForController($route_second)) - count($this->getParamsForController($route_first)));
+    return $routes[0];
   }
 
   /**
@@ -72,7 +72,7 @@ class Router
       throw new MethodNotFoundException($method_name, $controller_name);
     }
     $params_to_controller = $this->getParamsForController($exec_route);
-    return call_user_func_array([$controller, $method_name], $params_to_controller);
+    return call_user_func_array([$controller, $method_name], array_merge(['request' => $this->request], $params_to_controller));
 
   }
 

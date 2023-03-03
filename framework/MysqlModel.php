@@ -24,7 +24,7 @@ class MysqlModel extends Model
     $query->bindParam(":value", $value);
 //        echo $query->queryString;
     $query->execute();
-    return $query->fetchAll(\PDO::FETCH_CLASS, static::class);
+    return self::fetchAll($query);
   }
 
   public static function create($fields)
@@ -46,13 +46,13 @@ class MysqlModel extends Model
   public static function all()
   {
     $query = self::getConnection()->query("SELECT * FROM " . static::$table);
-    return $query->fetchAll(\PDO::FETCH_CLASS);
+    return self::fetchAll($query);
   }
 
   public static function first()
   {
     $query = self::getConnection()->query("SELECT * FROM " . static::$table . " LIMIT 1");
-    return $query->fetchAll(\PDO::FETCH_CLASS);
+    return self::fetchAll($query);
   }
 
   protected static function getConnection(): \PDO
@@ -72,5 +72,10 @@ class MysqlModel extends Model
   public static function updateWhere($conditions)
   {
     // TODO: Implement updateWhere() method.
+  }
+
+  private static function fetchAll(\PDOStatement $PDOStatement)
+  {
+    return $PDOStatement->fetchAll(\PDO::FETCH_CLASS, static::class);
   }
 }
