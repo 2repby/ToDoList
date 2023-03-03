@@ -19,6 +19,10 @@ class UserModel extends MysqlModel
 //    {
 //        // TODO: Implement getWhere() method.
 //    }
+    public function getById($id){
+        $user = new UserModel();
+        return $user->getWhere($this->getIdField(), '=', $id);
+    }
 
     public function deleteWhere($conditions)
     {

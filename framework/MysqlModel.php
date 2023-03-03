@@ -14,18 +14,12 @@ class MysqlModel extends Model
     {
         $this->connection = DbConnection::getConnection();
     }
-    public function getById($id){
-//           var_dump([$this->getIdField()=>$id]);
-        return $this->getWhere([$this->getIdField()=>$id]);
-    }
-    public function getWhere($conditions)
+
+    public function getWhere($field=null, $operation=null, $value=null)
     {
-        $condition = implode(" AND ", array_map(function($key,$value){return "$key = :$key";},  array_keys($conditions), $conditions));
-//        echo "Условие: ", $condition;
-        $query = $this->connection->prepare("SELECT * FROM $this->table WHERE $condition");
-        foreach ($conditions as $condition => $value){
-            $query->bindParam(":$condition", $value);
-        }
+        $query = $this->connection->prepare("SELECT * FROM $this->table WHERE ".$field." ".$operation." :value");
+        $query->bindParam(":value", $value);
+        echo $query->queryString;
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_CLASS);
     }
@@ -55,6 +49,11 @@ class MysqlModel extends Model
 
     public function all(){
         $query = $this->connection->query("SELECT * FROM ".$this->table);
+        return $query->fetchAll(\PDO::FETCH_CLASS);
+    }
+
+    public function first(){
+        $query = $this->connection->query("SELECT * FROM ".$this->table." LIMIT 1");
         return $query->fetchAll(\PDO::FETCH_CLASS);
     }
 }

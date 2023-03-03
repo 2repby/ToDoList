@@ -27,15 +27,15 @@ class Route
 //        $params = [];
 //        preg_match_all('/{([a-z]\w*)}/',$this->path,$params);
 //        echo "params: ";
-//        var_dump($params);
+//       var_dump($params);
 //        echo "<br>";
 //        return $params[0];
-//    }
-    public function getMask(){
+//  }
 
+    public function getMask(){
         $path = $this->path;
         $path =  preg_replace("/{[a-z]\w*}/","(\w*)",$path);
-        echo "<br>Mask: ".$path."<br>";
+        echo "Mask: ".$path."<br>";
         return '~'.$path.'~';
     }
 

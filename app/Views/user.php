@@ -16,7 +16,9 @@
             <?=$user->lastname?>
             <?=$user->email?>
         </li>
-    <?php endforeach; ?>
+    <?php endforeach;
+    var_dump($data);
+    ?>
 
 </ul>
 </body>

@@ -5,14 +5,13 @@ namespace Framework;
 abstract class Model
 {
     public function getById($id){
-        return $this->getWhere([$this->getIdField()=>$id]);
+        return $this->getWhere($this->getIdField(), '=', $id);
     }
 
-    public abstract function getWhere($conditions);
+    public abstract function getWhere($field=null, $operation=null, $value=null);
 
-    public function all(){
-        return $this->getWhere([]);
-    }
+    public abstract function all();
+
 
     public function deleteById($id){
         $this->getWhere([$this->getIdField()=>$id]);

@@ -3,6 +3,8 @@
     use Dotenv\Dotenv;
     use Framework\Container;
 
+    session_start(["use_strict_mode" => true]);
+
     date_default_timezone_set('Asia/Yekaterinburg');
     if ( file_exists(dirname(__FILE__).'/vendor/autoload.php') ) {
         require_once dirname(__FILE__).'/vendor/autoload.php';
