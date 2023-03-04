@@ -8,7 +8,7 @@ abstract class Model
 
   public static function getById($id)
   {
-    return static::getWhere(static::$primaryKey, '=', $id);
+    return static::getWhere(static::$primaryKey, '=', $id)[0];
   }
 
   public static abstract function getWhere($field = null, $operation = null, $value = null);

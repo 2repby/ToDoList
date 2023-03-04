@@ -1,4 +1,8 @@
-Текущий пользователь: <?=$data['login']?>
+<?php if($data['user']) { ?>
+Текущий пользователь: <?=$data['user']->email?>
+        <br>
+<a href="/logout">Выйти</a>
+<?php } else {?>
 <section class="form">
     <div class="container">
         <h1 class="catalog-title">Вход в систему</h1>
@@ -16,4 +20,8 @@
         </form>
     </div>
 </section>
+<?php }
+echo ($data['message'])
 
+
+?>

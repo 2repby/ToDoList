@@ -13,15 +13,15 @@ class MysqlModel extends Model
   /**
    * MysqlModel constructor.
    */
-  public function __construct(array $attrubutes)
+  public function __construct(array $attrubutes = [])
   {
   }
 
   public static function getWhere($field = null, $operation = null, $value = null)
   {
     $table = static::$table;
-    $query = self::$connection->prepare("SELECT * FROM ${table} WHERE " . $field . " " . $operation . " :value");
-    $query->bindParam(":value", $value);
+    $query = self::getConnection()->prepare("SELECT * FROM ${table} WHERE ".$field." " .$operation." '".$value."'");
+//    $query->bindValue(':value', $value);
 //        echo $query->queryString;
     $query->execute();
     return self::fetchAll($query);
@@ -57,7 +57,7 @@ class MysqlModel extends Model
 
   protected static function getConnection(): \PDO
   {
-    if (self::$connection) {
+    if (isset(self::$connection)) {
       return self::$connection;
     }
     self::$connection = DbConnection::getConnection();

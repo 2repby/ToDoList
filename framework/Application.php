@@ -20,6 +20,7 @@ class Application
   {
     try {
       echo $this->router->getContent();
+
     } catch (UnauthorizedException $e){
       http_response_code(401);
       echo $e->getMessage();

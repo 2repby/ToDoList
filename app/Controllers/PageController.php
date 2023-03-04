@@ -13,6 +13,6 @@ class PageController extends Controller
 {
     public function index(Request $request, $view)
     {
-        return $this->view($view.'.php', ['user' =>  $request->getUser(), 'name' => 'Дима']);
+        return $this->view($view.'.php', ['user' =>  $request->getUser(), 'message' => $request->getSession()['msg']]);
     }
 }

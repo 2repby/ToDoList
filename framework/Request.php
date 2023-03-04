@@ -21,6 +21,7 @@ class Request
         if($_SERVER['REQUEST_METHOD'] === 'POST') $this->type = Route::METHOD_POST;
         if($_SERVER['REQUEST_METHOD'] === 'GET') $this->type = Route::METHOD_GET;
         $this->session = $_SESSION;
+        $_SESSION['msg'] = null;
     }
 
     /**
