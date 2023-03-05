@@ -14,13 +14,13 @@ class AuthController extends Controller
         $password = $request->getPostParams()['password'];
 //        echo ($login.' '.$password);
         if (isset($login) and $login != '') {
-            $user = UserModel::getWhere('email', '=', $login);
+            $user = UserModel::getWhere('email', '=', $login)[0];
             if ($user){
-                if (MD5($password) == $user[0]->md5password){
-                    $_SESSION['login'] = $user[0]->email;
-                    $_SESSION['firstname'] = $user[0]->firstname;
-                    $_SESSION['lastname'] = $user[0]->lastname;
-                    $_SESSION['id'] = $user[0]->id;
+                if (MD5($password) == $user->md5password){
+                    $_SESSION['login'] = $user->email;
+                    $_SESSION['firstname'] = $user->firstname;
+                    $_SESSION['lastname'] = $user->lastname;
+                    $_SESSION['id'] = $user->id;
 
                     $_SESSION['msg'] = "Вы успешно вошли в систему";
                 }
