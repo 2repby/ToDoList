@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php require 'app/views/header.php'?>
-<h2>Главная страница></h2>
+<h2>Главная страница</h2>
 <p>Даннные представления:</p>
 <?=var_dump($data)?>
 </body>

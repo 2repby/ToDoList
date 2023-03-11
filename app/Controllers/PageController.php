@@ -11,8 +11,11 @@ use Framework\Request;
 
 class PageController extends Controller
 {
-    public function index(Request $request, $view)
+    public function index(Request $request, $view = null)
     {
-        return $this->view($view.'.php', ['user' =>  $request->getUser(), 'message' => $request->getSession()['msg']]);
+        if ($view)
+            return $this->view($view.'.php', ['user' =>  $request->getUser(), 'message' => $request->getSession()['msg']]);
+        else
+            return $this->view('hello.php', ['user' =>  $request->getUser(), 'message' => $request->getSession()['msg']]);
     }
 }

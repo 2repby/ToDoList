@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        return $this->view('users.php', ['users' => UserModel::all()]);
+        return $this->view('users.php', ['user' =>  $request->getUser(), 'message' => $request->getSession()['msg'], 'users' => UserModel::all()]);
 
     }
     public function getByID(Request $request, int $id)

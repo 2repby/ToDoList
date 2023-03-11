@@ -17,7 +17,7 @@
         // var_dump($_ENV);
     }
     else {
-        echo "Ошибка хагрузки ENV<br>";
+        echo "Ошибка загрузки ENV<br>";
     }
     Container::getApp()->run();
 
