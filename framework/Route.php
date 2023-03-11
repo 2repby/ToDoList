@@ -35,7 +35,7 @@ class Route
     public function getMask(){
         $path = $this->path;
         $path =  preg_replace("/{[a-z]\w*}/","(\w*)",$path);
-        echo "Mask: ".$path."<br>";
+//        echo "Mask: ".$path."<br>";
         return '~'.$path.'~';
     }
 
