@@ -28,13 +28,13 @@ class AuthController extends Controller
             }
             else $_SESSION['msg'] = "Неправильный логин";
         }
-        header('Location: /page/hello');
+        header('Location: /');
         exit();
     }
     public function logout(Request $request){
         $_SESSION = null;
         $_SESSION['msg'] =  "Вы успешно вышли из системы";
-        header('Location: /page/hello');
+        header('Location: /');
         exit();
     }
 }
