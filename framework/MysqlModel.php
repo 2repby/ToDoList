@@ -29,16 +29,21 @@ class MysqlModel extends Model
 
   public static function create($fields)
   {
+      echo ('<br>параметры метода:<br>');
+      var_dump($fields);
     $keys_array = array_keys($fields);
     $keys = implode(", ", $keys_array);
+      echo ('<br>ключи:<br>');
+      var_dump($keys);
     $placeholders = implode(", ", array_map(function ($el) {
       return ":$el";
     }, $keys_array));
-    //var_dump($placeholders);
+      echo ('<br>placeholders:<br>');
+    var_dump($placeholders);
     $table = static::$table;
     $query = self::getConnection()->prepare("INSERT INTO {$table} ({$keys}) VALUES ($placeholders)");
     foreach ($fields as $key => $field) {
-      $query->bindParam(":$key", $field);
+      $query->bindValue(":".$key, $field);
     }
     $query->execute();
   }
@@ -64,9 +69,15 @@ class MysqlModel extends Model
     return self::$connection;
   }
 
-  public function deleteWhere($conditions)
+  public static function deleteWhere($field = null, $operation = null, $value = null)
   {
     // TODO: Implement deleteWhere() method.
+      $table = static::$table;
+      $query = self::getConnection()->prepare("DELETE FROM ${table} WHERE ".$field." " .$operation." '".$value."'");
+//    $query->bindValue(':value', $value);
+        echo $query->queryString;
+      return $query->execute();
+//      return self::fetchAll($query);
   }
 
   public static function updateWhere($conditions)

@@ -8,13 +8,15 @@
 <?php
         foreach ($data['categories'] as $category) { ?>
         <div class="d-flex text-muted pt-3">
-            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+            <img src="<?=$category->picture_url?>" alt="Task picture" height="60px">
             <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                 <div class="d-flex justify-content-between">
                     <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                         <div class="d-flex justify-content-between">
                             <strong class="text-gray-dark"><?= $category->name ?></strong>
-                            <a href="#"><a href="deletecategory.php" class="btn btn-danger">Удалить</a></a>
+                            <?php if($data['user']) {
+                            echo('<a href="#"><a href="deletecategory/'.$category->id.'" class="btn btn-danger">Удалить</a>');
+                                 } ?>
                         </div>
                     </div>
                 </div>

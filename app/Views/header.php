@@ -24,6 +24,9 @@
                         <a class="nav-link" href="/categories">Категории</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/newcategory">Новая категория</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/tasks">Задачи</a>
                     </li>
                 </ul>

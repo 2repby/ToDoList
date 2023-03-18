@@ -8,6 +8,10 @@ Router::addRoute(new Route('page/{page}', 'PageController@index', Route::METHOD_
 Router::addRoute(new Route('user', 'UserController@index', Route::METHOD_GET, true));
 Router::addRoute(new Route('user/{id}', 'UserController@getById', Route::METHOD_GET, true));
 Router::addRoute(new Route('categories', 'CategoryController@index', Route::METHOD_GET));
+Router::addRoute(new Route('newcategory', 'CategoryController@new_category', Route::METHOD_GET, true));
+Router::addRoute(new Route('deletecategory/{id}', 'CategoryController@delete', Route::METHOD_GET, true));
+Router::addRoute(new Route('createcategory', 'CategoryController@store', Route::METHOD_POST, true));
+
 Router::addRoute(new Route('', 'PageController@index', Route::METHOD_GET));
 
 

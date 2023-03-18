@@ -2,8 +2,12 @@
 
 namespace Framework;
 
+use App\FileUploader;
+use App\LocalFileUploader;
+use App\S3ClientConfig;
+use App\S3FileUploader;
 use Aws\S3\S3Client;
-use FileUploader;
+//use FileUploader;
 
 
 class Container
@@ -45,9 +49,9 @@ class Container
     ]);
   }
 
-  public static function getS3Config(): \S3ClientConfig
+  public static function getS3Config(): S3ClientConfig
   {
-    return new \S3ClientConfig($_ENV['S3_BUCKET'], $_ENV['S3_ENDPOINT'], $_ENV['S3_REGION'], $_ENV['S3_KEY'], $_ENV['S3_SECRET'], $_ENV['S3_VERSION']);
+    return new S3ClientConfig($_ENV['S3_BUCKET'], $_ENV['S3_ENDPOINT'], $_ENV['S3_REGION'], $_ENV['S3_KEY'], $_ENV['S3_SECRET'], $_ENV['S3_VERSION']);
 
   }
 
@@ -58,14 +62,14 @@ class Container
     //return self::getLocalFileUploader();
   }
 
-  public static function getS3FileUploader(): \S3FileUploader
+  public static function getS3FileUploader(): S3FileUploader
   {
-    return new \S3FileUploader(self::getS3Client(), self::getS3Config());
+    return new S3FileUploader(self::getS3Client(), self::getS3Config());
   }
 
-  public static function getLocalFileUploader(): \LocalFileUploader
+  public static function getLocalFileUploader(): LocalFileUploader
   {
-    return new \LocalFileUploader();
+    return new LocalFileUploader();
   }
 //    public static function getDbConnection(): \DbConnection
 //    {

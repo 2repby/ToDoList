@@ -1,7 +1,7 @@
 <?php
+namespace App;
 
-
-class FakeUploader implements \FileUploader
+class FakeUploader implements FileUploader
 {
 
     public function __construct($client = null, $config = [])

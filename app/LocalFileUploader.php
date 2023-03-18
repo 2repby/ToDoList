@@ -1,7 +1,7 @@
 <?php
+namespace App;
 
-
-class LocalFileUploader implements \FileUploader
+class LocalFileUploader implements FileUploader
 {
 
     public function __construct($client = null, $config = [])

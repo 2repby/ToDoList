@@ -20,7 +20,7 @@ abstract class Model
   {
   }
 
-  public abstract function deleteWhere($conditions);
+  public abstract static function deleteWhere($conditions);
 
   public function updateById($id)
   {

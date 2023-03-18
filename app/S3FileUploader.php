@@ -1,7 +1,9 @@
 <?php
 
+namespace App;
 
 use Aws\S3\S3Client;
+//use FileUploader;
 
 class S3FileUploader implements FileUploader
 {
