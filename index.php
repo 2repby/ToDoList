@@ -1,9 +1,7 @@
 <?php
 
     use Dotenv\Dotenv;
-    use Framework\Request;
-    use Framework\Router;
-    use Framework\Application;
+    use Framework\Container;
 
     date_default_timezone_set('Asia/Yekaterinburg');
     if ( file_exists(dirname(__FILE__).'/vendor/autoload.php') ) {
@@ -19,10 +17,7 @@
     else {
         echo "Ошибка хагрузки ENV<br>";
     }
-    Application::init();
-    $request = new Request();
-
-    echo (new Router($request))->getContent();
+    Container::getApp()->run();
 
 
     exit();

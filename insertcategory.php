@@ -1,5 +1,8 @@
 <?php
-    require "dbconnect.php";
+
+use Framework\Container;
+
+require "dbconnect.php";
     if (strlen($_POST['name']) >= 3){
         //получение загруженного файла
         if ($file = fopen($_FILES['filename']['tmp_name'], 'r+')){

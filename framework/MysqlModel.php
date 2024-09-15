@@ -14,10 +14,20 @@ class MysqlModel extends Model
     {
         $this->connection = DbConnection::getConnection();
     }
-
+    public function getById($id){
+//           var_dump([$this->getIdField()=>$id]);
+        return $this->getWhere([$this->getIdField()=>$id, 'email'=>2]);
+    }
     public function getWhere($conditions)
     {
-        // TODO: Implement getWhere() method.
+        $condition = implode(" AND ", array_map(function($key,$value){return "$key = :$key";},  array_keys($conditions), $conditions));
+//        echo "Условие: ", $condition;
+        $query = $this->connection->prepare("SELECT * FROM $this->table WHERE $condition");
+        foreach ($conditions as $condition => $value){
+            $query->bindParam(":$condition", $value);
+        }
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function deleteWhere($conditions)
