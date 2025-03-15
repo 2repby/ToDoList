@@ -4,24 +4,24 @@
     require "auth.php";
     require "menu.php";
     echo '<main class="container" style="margin-top: 100px">';
-    switch ($_GET['page']){
-        case 'c':
-            if (isset($_SESSION['login'])) {
-                require "categories.php";
-            }
-            else{
-                $msg = 'Войдите в систему для просмотра и создания категорий';
+    if (isset($_GET['page'])) {
+        switch ($_GET['page']) {
+            case 'c':
+                if (isset($_SESSION['login'])) {
+                    require "categories.php";
+                } else {
+                    $msg = 'Войдите в систему для просмотра и создания категорий';
                 }
-            break;
-        case 't':
-            if (isset($_SESSION['login'])){
-                require "tasks.php";
-                require "taskform.php";
-            }
-            else{
-                $msg = 'Войдите в систему для просмотра и создания задач';
-            }
-            break;
+                break;
+            case 't':
+                if (isset($_SESSION['login'])) {
+                    require "tasks.php";
+                    require "taskform.php";
+                } else {
+                    $msg = 'Войдите в систему для просмотра и создания задач';
+                }
+                break;
+        }
     }
     echo '</main>';
 

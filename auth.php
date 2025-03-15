@@ -4,7 +4,7 @@
     if (isset($_POST["login"]) and $_POST["login"]!='')
     {
         try {
-            $sql = 'SELECT id, firstname, lastname, md5password FROM user WHERE email=(:login)';
+            $sql = 'SELECT * FROM users WHERE email=(:login)';
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':login', $_POST['login']);
             $stmt->execute();
